@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="crm_reportdate_form_view">
+           <field name="name">crm.reportdate.form.view</field>
+           <field name="model">crm.reportdate</field>
+           <field name="arch" type="xml">
+               <form string="Report Date Form">
+                <header>
+                  <button name="button_confirm" type="object"
+                          string="Confirmar" class="oe_highlight"/>
+                
+                </header>
+                    <sheet>
+                      <div class="oe_right oe_button_box">
+
+                          <button class="oe_inline oe_stat_button" type="action"
+                              name="name" icon="fa-list">
+                              <div>Adjustment <br/>For Month</div>
+                          </button>
+
+                      </div>
+
+                      <div class="oe_title">
+                          <label for="name" class="oe_edit_only" string="Report Name" />
+                          <h2><field name="name" string="Report Name"/></h2>
+                      </div>
+                      
+                      <group>                           
+                          <field name="start_date"/>
+                      </group>
+                            
+                      <notebook>
+                          <page string="Reportes">
+                              <field name="report_of_photo_ids" />
+                          </page>
+                          <page string="Note">
+                              <field name="note"/>
+                          </page>
+                      </notebook>
+
+                    </sheet>
+               </form>
+           </field>
+        </record>
+
+        <record model="ir.ui.view" id="crm_reportdate_tree_view">
+           <field name="name">crm.reportdate.tree.view</field>
+           <field name="model">crm.reportdate</field>
+           <field name="arch" type="xml">
+                <tree string="Report Date">
+                    <field name="name"/>
+                    <field name="start_date"/>
+                       <!-- Boton Tree Ajut -->
+                     <button string="Ajuste"
+                    name="name"
+                    icon="gtk-index"
+                    type="action"/>
+                    <!-- Fin - Boton Tree Ajut -->
+
+                </tree>
+           </field>  
+        </record>
+
+        <record model="ir.actions.act_window" id="report_date_list_action">
+            <field name="name">Report Date</field>
+            <field name="res_model">crm.reportdate</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="report_date_menu" name="Report Date" parent="reportdate_menu"
+                  action="report_date_list_action"/>
+
+
+    </data>
+</openerp>

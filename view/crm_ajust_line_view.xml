@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="ajuste_line_form_view">
+           <field name="name">crm.ajust2line.form.view</field>
+           <field name="model">crm.ajust2line</field>
+           <field name="arch" type="xml">
+               <form string="Adjustment Line Form">
+                    <sheet>
+                        <group>
+                            <field name="photo_id"/>
+                            <field name="semana_id"/>
+                            <field name="name"/>
+                            <field name="partner_id"/>
+                            <field name="user_id"/>
+                            <field name="date"/>
+                            <field name="mont_mensual"/>
+                            <field name="mont_adjustment"/>
+                        </group>
+                    </sheet>
+               </form>
+           </field>
+        </record>
+
+        <record model="ir.ui.view" id="ajuste_line_tree_view">
+           <field name="name">crm.ajust2line.tree.view</field>
+           <field name="model">crm.ajust2line</field>
+           <field name="arch" type="xml">
+                <tree string="Adjustment Line">
+                    <field name="semana_id"/>
+                    <field name="photo_id"/>
+                    <field name="date"/>
+                    <field name="mont_mensual"/>
+                    <field name="mont_adjustment"/>
+                </tree>
+           </field>  
+        </record>
+     
+
+       <record model="ir.ui.view" id="ajuste_line_kanban_view">
+            <field name="name">crm.ajust2line.kanban.view</field>
+            <field name="model">crm.ajust2line</field>
+            <field name="arch" type="xml">
+                <kanban class="oe_background_grey">
+                    <field name="name"/>
+                    <field name="photo_id"/>
+                    <field name="color"/>
+                    <field name="mont_mensual"/>
+                    <field name="user_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click oe_kanban_crm_salesteams">
+                                <div class="oe_dropdown_toggle oe_dropdown_kanban" groups="base.group_sale_manager">
+                                    <span class="oe_e">í</span>
+                                    <ul class="oe_dropdown_menu">
+                                        <li t-if="widget.view.is_action_enabled('edit')"><a type="edit">Sales Teams Settings</a></li>
+                                        <li t-if="widget.view.is_action_enabled('delete')"><a type="delete">Delete</a></li>
+                                        <li t-if="widget.view.is_action_enabled('edit')"><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                                    </ul>
+                                </div>
+                                <div class="oe_kanban_content">
+                                    <h4 class="text-center" name="name"><strong><field name="name"/></strong></h4>
+                                    <div class="oe_clear"></div>
+                                    <div class="oe_items_list">
+                                        <div class="oe_salesteams_quotations">
+                                            <a name="name" class="oe_sparkline_bar_link">Quotations</a>
+                                        </div>
+                                        <div class="oe_salesteams_quotations">
+                                            <a name="name" class="oe_sparkline_bar_link">Quotations</a>
+                                        </div>
+                                      
+
+                                        <div class="oe_salesteams_orders">
+                                            <a name="name" type="action">Projected</a>
+                                            <a name="name" type="action" class="oe_sparkline_bar_link">
+                                                <field name="mont_mensual" options="{'delayIn': '3000'}">.</field>
+                                            </a>
+                                        </div>
+                                        <div class="oe_salesteams_invoices" groups="account.group_account_invoice">
+                                            <a name="name" type="action">Ajuste</a>
+                                            <a name="name" type="action" class="oe_sparkline_bar_link">
+                                                <field name="mont_adjustment" options="{'delayIn': '3000'}">.</field>
+                                            </a>
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <div class="oe_center" t-if="record.mont_mensual.raw_value">
+                                        <field name="mont_mensual" widget="gauge" style="width:160px; height: 120px; cursor: pointer;"
+                                            options="{'max_field': 'mont_adjustment'}">Projected</field>
+                                        <field name="mont_adjustment" widget="gauge" style="width:160px; height: 120px; cursor: pointer;"
+                                            options="{'max_field': 'mont_mensual', 'on_change': 'action_ajust'}">Ajuste</field>
+                                    </div>
+
+                                    <div class="oe_center oe_salesteams_help" style="color:#bbbbbb;" t-if="!record.mont_mensual.raw_value">
+                                        <br/>Define an invoicing target in the sales team settings.
+                                    </div>
+
+
+                                    <div class="oe_items_list">
+                                        <div class="oe_salesteams_orders">
+                                            <a name="name">Projected</a>
+                                            <a name="name" class="oe_rightalign">
+                                                <field name="mont_mensual"></field>
+                                            </a>
+                                        </div>
+                                        <div class="oe_salesteams_invoices" groups="account.group_account_invoice">
+                                            <a name="name">Ajuste</a>
+                                            <a name="name" class="oe_leftalign">
+                                                <field name="mont_adjustment"></field>
+                                            </a>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="oe_kanban_salesteams_avatars">
+                                        <t t-foreach="record.user_id.raw_value.slice(0,1)" t-as="member">
+                                            <img t-att-src="kanban_image('res.users', 'image_small', member)" t-att-data-member_id="member"/>
+                                        </t>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+<!-- top level menu: Accion -->
+        <record model="ir.actions.act_window" id="crm_adjustment2line_list_action">
+            <field name="name">CRM Adjustment Line</field>
+            <field name="res_model">crm.ajust2line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first CRM Adjustment
+                </p>
+            </field>
+        </record>
+
+        <!-- top level menu: no parent -->
+        <menuitem id="crm_adjustment2line_menu" name="CRM Adjustment Line" parent="reportdate_menu"
+                  action="crm_adjustment2line_list_action"/>
+
+
+
+
+        <act_window
+          id="act_crm_photo_window"
+          name="Phone calls"
+          res_model="crm.reportdate"
+          view_mode="tree,form"
+          context="{'default_duration': 1.0 ,'default_opportunity_id': active_id}"
+          view_type="tree"/>
+<!-- <field domain="[('commercial_id.id', '=', 4)]" name="commercial_id"/>
+ <field name="commercial_id" domain="[('id', '=', 4)]"/>
+
+-->
+
+    </data>
+</openerp>

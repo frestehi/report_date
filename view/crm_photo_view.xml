@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="crm_photo_form_view">
+           <field name="name">crm.photo.form.view</field>
+           <field name="model">crm.photo</field>
+           <field name="arch" type="xml">
+               <form string="PHOTO Form">
+                    <sheet>
+                        <group>
+    			                <field name="report_date_id"/>
+            							<field name="lead_id"/>
+            							<field name="planned_revenue"/>
+            							<field name="date_deadline"/>
+            							<field name="user_id"/>
+                          <field name="name"/>
+                          <field name="partner_id"/>
+                          <field name="section_id"/>
+                          <field name="stage_id"/>
+                          <field name="state_forecast"/>
+                        </group>
+                    </sheet>
+               </form>
+           </field>
+        </record>
+
+        <record model="ir.ui.view" id="crm_photo_tree_view">
+           <field name="name">crm.photo.tree.view</field>
+           <field name="model">crm.photo</field>
+           <field name="arch" type="xml">
+                <tree string="PHOTO">
+                    <field name="report_date_id"/>
+          					<field name="user_id"/>
+          					<field name="partner_id"/>
+          					<field name="planned_revenue" sum="Expected Revenues"/>
+          					<field name="date_deadline"/>
+                </tree>
+           </field>  
+        </record>
+
+
+
+
+
+        <record model="ir.actions.act_window" id="crm_photo_list_action">
+            <field name="name">CRM PHOTO</field>
+            <field name="res_model">crm.photo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first CRM Adjustment
+                </p>
+            </field>
+        </record>
+
+        <!-- top level menu: no parent -->
+        <menuitem id="crm_photo_menu" name="CRM PHOTO" parent="reportdate_menu"
+                  action="crm_photo_list_action"/>
+
+    </data>
+</openerp>

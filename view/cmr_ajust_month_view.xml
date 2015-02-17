@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="crm_ajust_month_form_view">
+           <field name="name">crm.ajust.month.form.view</field>
+           <field name="model">crm.ajust.month</field>
+           <field name="arch" type="xml">
+               <form string="CRM AJUST MONTH">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="report_id"/>
+                            <field name="month"/>
+                            <field name="line_ids"/>
+                        </group>
+                    </sheet>
+               </form>
+           </field>
+        </record>
+
+        <record model="ir.ui.view" id="crm_ajust_month_tree_view">
+           <field name="name">crm.ajust.month.tree.view</field>
+           <field name="model">crm.ajust.month</field>
+           <field name="arch" type="xml">
+                <tree string="CRM AJUST MONTH">
+                    <field name="name"/>
+                    <field name="report_id"/>
+                    <field name="month"/>
+                    <field name="line_ids" />
+                </tree>
+           </field>  
+        </record>
+
+
+
+
+
+
+        <record model="ir.actions.act_window" id="crm_ajust_month_list_action">
+            <field name="name">Adjustment Month</field>
+            <field name="res_model">crm.ajust.month</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first Adjustment
+                </p>
+            </field>
+        </record>
+
+        <!-- top level menu: no parent -->
+        <menuitem id="crm_ajust_month_menu" name="Ajust Month" parent="reportdate_menu"
+                  action="crm_ajust_month_list_action"/>
+        <!-- Full id location:
+             action="openacademy.course_list_action"
+             It is not required when it is the same module -->
+
+
+    </data>
+</openerp>
+

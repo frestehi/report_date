@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_crm_reportdate_user,access_crm_reportdate,model_crm_reportdate,base.group_sale_salesman,1,0,0,0
+access_crm_reportdate_manager,access_crm_reportdate,model_crm_reportdate,base.group_sale_manager,1,1,1,1
+access_crm_photo_user,access_crm_photo,model_crm_photo,base.group_sale_salesman,1,0,0,0
+access_crm_photo_manager,access_crm_photo,model_crm_photo,base.group_sale_manager,1,1,1,1
+access_crm_ajust_month_user,access_crm_ajust_month,model_crm_ajust_month,base.group_sale_salesman,1,0,0,0
+access_crm_ajust_month_manager,access_crm_ajust_month,model_crm_ajust_month,base.group_sale_manager,1,1,1,1
+access_crm_ajust_month_line_user,access_crm_ajust_month_line,model_crm_ajust_month_line,base.group_sale_salesman,1,0,0,0
+access_crm_ajust_month_line_manager,access_crm_ajust_month_line,model_crm_ajust_month_line,base.group_sale_manager,1,1,1,1
